@@ -13,3 +13,8 @@ npm install
 ```
 npm run start
 ```
+## Libraries/tools used
+
+- `node.js`: https://nodejs.org/en/docs/
+- `tailwind css`: https://tailwindcss.com/docs/what-is-tailwind/
+- `mongoose`: https://mongoosejs.com/
