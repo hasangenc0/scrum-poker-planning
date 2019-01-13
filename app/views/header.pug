@@ -1,0 +1,12 @@
+div.border.border-grey-light
+  nav.flex.items-center.justify-between.flex-wrap.bg-white.p-6.mx-6
+    div.flex.items-center.flex-no-shrink.mr-6
+      include icon.pug
+      span.text-xl Scrum Poker
+    div.block(class='lg:hidden')
+      button.flex.items-center.px-3.py-2.border.rounded.text-teal-lighter.border-teal-light(class='hover:text-white hover:border-white')
+        svg.fill-current.h-3.w-3(viewBox='0 0 20 20', xmlns='http://www.w3.org/2000/svg')
+          path(d='M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z')
+    div.w-full.block.flex-grow(class='lg:flex lg:items-center lg:w-auto')
+      div.text-teal.text-sm(class='lg:flex-grow')
+        a.block.mt-4.no-underline.mr-4(href='/poker-planning-add-story-list', class='visited:text-teal-dark lg:inline-block lg:mt-0 hover:text-teal-dark') Add Story List

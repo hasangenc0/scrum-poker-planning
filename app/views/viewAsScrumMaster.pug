@@ -1,0 +1,73 @@
+extends index.pug
+
+block content
+  div.flex.flex-wrap.flex-row
+    if error
+      .w-full
+        include error.pug
+    else
+      div.hidden(id="session_name")=session.name
+      div.hidden(id="voter_id") 0
+      .rounded.shadow.flex.items-center.bg-teal.text-white.text-sm.font-bold.px-4.py-3.w-full.mx-6.mb-6(role='alert')
+        svg.fill-current.w-4.h-4.mr-2(xmlns='http://www.w3.org/2000/svg', viewBox='0 0 20 20')
+          path(d='M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z')
+        p please share link of developers panel to the teammates -> &nbsp;
+        a.text-grey(href="/poker-planning-view-as-developer/1/" + session.name) /poker-planning-view-as-developer/[voter-num]/#{session.name}
+
+      table.text-left.border-collapse.rounded.overflow-hidden.shadow-lg.bg-white.mx-6(class="w-9/20" id="story_list")
+        thead
+          tr
+            th.bg-grey-lighter.font-sans.font-medium.text-center.pt-2(colspan="3") Story List
+          tr
+            th.py-4.px-6.bg-grey-lighter.font-sans.font-medium.uppercase.text-sm.text-grey.border-b.border-grey-light Story
+            th.py-4.px-6.bg-grey-lighter.font-sans.font-medium.uppercase.text-sm.text-grey.border-b.border-grey-light Story Point
+            th.py-4.px-6.bg-grey-lighter.font-sans.font-medium.uppercase.text-sm.text-grey.border-b.border-grey-light Status
+        tbody
+          each story in session.session[0]
+            tr(class='stories hover:bg-blue-lightest')
+              td.py-4.px-6.border-b.border-grey-light.text-sm=story.name
+              td.py-4.px-16.border-b.border-grey-light.text-sm=story.point
+              if story.point == ''
+                td.py-4.px-6.border-b.border-grey-light.text-sm  Not Voted
+              else
+                td.py-4.px-6.border-b.border-grey-light.text-sm Voted
+      .rounded.overflow-hidden.shadow-lg.bg-white.mx-6(class="w-9/20")
+        .flex.mb-4
+          .bg-grey-lighter.flex-1.py-2.text-center Active Story &nbsp;
+            span.text-xs#selected_story_name (Please select a story from story list)
+        .flex.mb-4
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 1
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 2
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 3
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 5
+        .flex.mb-4
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 8
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 13
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 21
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 34
+        .flex.mb-4
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 55
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 89
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 134
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') ?
+        .flex.mb-4
+          .flex-1.text-center#isVoted Not Voted
+      .my-6.rounded.overflow-hidden.shadow-lg.bg-white.mx-6.w-full
+        .flex.mb-4
+          .bg-grey-lighter.flex-1.py-2.text-center Scrum Master Panel &nbsp;
+        .mb-4#master_panel
+          .text-l.mx-6.my-4.w-full#panel_message There is no active story. Please select one from list above.
+          .flex.mx-6.my-4.w-full
+            div(class="w-1/2")
+              - var n = 1;
+              while n < session.voter_number
+                .text-l.mx-6.my-4.w-full.voters_info Voter #{n++}: &nbsp;
+                  span
+              .text-l.mx-6.my-4.w-full Scrum Master : &nbsp;
+                span#master_vote
+            div(class="w-1/2")
+              input.shadow.appearance-none.border.rounded.py-2.px-3.mb-4.text-grey-darker.leading-tight.hidden(type="text" id="final_score" placeholder="Final Score..")
+              br
+              button#end_voting.hidden.bg-teal.text-white.font-bold.py-2.px-4.border.border-blue-darker.rounded(class='hover:bg-blue-dark')
+                | End Voting
+              p.hidden You can not end voting till each teammate voted

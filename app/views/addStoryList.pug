@@ -1,0 +1,22 @@
+extends index.pug
+
+block content
+  div.w-full
+    if error
+      include error.pug
+    form.bg-white.shadow-md.rounded.px-4.pt-6.pb-8.mb-4.mx-6.flex.flex-wrap(method='post' id='add-story-form')
+      div(class="w-full md:w-1/2 px-3 mb-6 md:mb-0")
+        label.block.text-grey-darker.text-sm.font-bold.mb-2(for='session_name') Session Name
+        input#session_name.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-grey-darker.leading-tight(type='text', placeholder='Session Name..', class='focus:outline-none focus:shadow-outline' name="session_name")
+        p(class="text-red text-xs italic mt-2" id='validate_session_name')
+      div(class="w-full md:w-1/2 px-3 mb-6 md:mb-0")
+        label.block.text-grey-darker.text-sm.font-bold.mb-2(for='voters_num') Number of Voters
+        input#voters_num.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-grey-darker.leading-tight(type='number', placeholder='5', class='focus:outline-none focus:shadow-outline' name="voters_num")
+        p(class="text-red text-xs italic mt-2" id='validate_voters_num')
+      div.mt-6(class="w-full px-3 mb-6 md:mb-0")
+        label.block.text-grey-darker.text-sm.font-bold.mb-2(for='story_list') Paste your story list (Each Line will be converted as a story)
+        textarea#story_list.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-grey-darker.leading-tight(type='text', placeholder='Story 1..',class='focus:outline-none focus:shadow-outline' name="story_list" rows='10')
+        p(class="text-red text-xs italic mt-2" id='validate_story_list')
+      div.mt-6(class="w-full px-3 mb-6 md:mb-0")
+        button.bg-teal.text-white.font-bold.py-2.px-4.rounded.float-right(class='hover:bg-teal-dark focus:outline-none focus:shadow-outline', type='submit') Start Session
+

@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title=title
+    link(rel='stylesheet' type="text/css" href='/css/app.css')
+  body
+    include header.pug
+    div.bg-grey-lighter.h-full.w-full.p-6
+      block content
+      include footer.pug
+    script(src='/js/app.js' defer)

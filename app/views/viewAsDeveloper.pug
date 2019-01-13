@@ -1,0 +1,49 @@
+extends index.pug
+
+block content
+  div.flex.flex-wrap.flex-row
+    if error
+      .w-full
+        include error.pug
+    else
+      div.hidden(id="session_name")=session.name
+      div.hidden(id="voter_id")=voter
+
+      table.text-left.border-collapse.rounded.overflow-hidden.shadow-lg.bg-white.mx-6(class="w-9/20" id="story_list")
+        thead
+          tr
+            th.bg-grey-lighter.font-sans.font-medium.text-center.pt-2(colspan="3") Story List
+          tr
+            th.py-4.px-6.bg-grey-lighter.font-sans.font-medium.uppercase.text-sm.text-grey.border-b.border-grey-light Story
+            th.py-4.px-6.bg-grey-lighter.font-sans.font-medium.uppercase.text-sm.text-grey.border-b.border-grey-light Story Point
+            th.py-4.px-6.bg-grey-lighter.font-sans.font-medium.uppercase.text-sm.text-grey.border-b.border-grey-light Status
+        tbody
+          each story in session.session[parseInt(voter)]
+            tr(class='stories hover:bg-blue-lightest')
+              td.py-4.px-6.border-b.border-grey-light.text-sm=story.name
+              td.py-4.px-16.border-b.border-grey-light.text-sm=story.point
+              if story.point == ''
+                td.py-4.px-6.border-b.border-grey-light.text-sm  Not Voted
+              else
+                td.py-4.px-6.border-b.border-grey-light.text-sm Voted
+      .rounded.overflow-hidden.shadow-lg.bg-white.mx-6(class="w-9/20")
+        .flex.mb-4
+          .bg-grey-lighter.flex-1.py-2.text-center Active Story &nbsp;
+            span.text-xs#selected_story_name (Please select a story from story list)
+        .flex.mb-4
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 1
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 2
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 3
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 5
+        .flex.mb-4
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 8
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 13
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 21
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 34
+        .flex.mb-4
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 55
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 89
+          .rounded.flex-1.bg-grey.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') 134
+          .rounded.flex-1.bg-grey-light.h-12.text-center.py-4.mx-3(class='vote_counts border hover:border-blue') ?
+        .flex.mb-4
+          .flex-1.text-center#isVoted Not Voted

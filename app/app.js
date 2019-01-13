@@ -6,19 +6,14 @@ const bodyParser = require('body-parser');
 
 let app = express();
 
+// handle form submits with body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-//view engine setup
-app.use(express.static(path.join(__dirname, 'public')));
-app.set('views', path.join(__dirname, 'app/views'));
-app.set('view engine', 'ejs');
-
-app.use(session({
-    secret: 'I Love India...',
-    resave: true,
-    saveUninitialized: true
-}));
+// view engine setup
+app.use(express.static(path.join(__dirname, '../public')));
+app.set('views', path.join(__dirname, '/views'));
+app.set('view engine', 'pug');
 
 // routes
 require('./routes/routes.js')(app); // load route

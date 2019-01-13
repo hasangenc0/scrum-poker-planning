@@ -2,7 +2,8 @@
   "name": "poker-planning",
   "version": "0.0.0",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app/app.js",
+    "styles": "./node_modules/.bin/tailwind build ./app/assets/styles/styles.css -c ./tailwind.js -o ./public/css/app.css"
   },
   "dependencies": {
     "async": "latest",
@@ -35,9 +36,13 @@
     "passport": "latest",
     "passport-local": "latest",
     "pm2": "latest",
+    "pug": "^2.0.3",
     "request": "latest",
     "serve-favicon": "~2.3.0",
     "simple-encryptor": "latest",
     "underscore": "latest"
+  },
+  "devDependencies": {
+    "tailwindcss": "^0.7.3"
   }
 }
