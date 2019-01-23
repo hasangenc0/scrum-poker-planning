@@ -14,7 +14,7 @@ let handleSubmit = (() => {
   }
 
   let isOutOfRange = (val) => {
-    return (/^[a-z]{0,200}$/.test(val));
+    return val.length > 200;
   }
 
   let submit = (event) => {

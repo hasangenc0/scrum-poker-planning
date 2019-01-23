@@ -1,5 +1,4 @@
 const Session = require("../models/session");
-const mongoose = require('mongoose');
 
 let addStoryListPost = async (req, res) => {
   console.log("hasan: ");
@@ -14,7 +13,7 @@ let addStoryListPost = async (req, res) => {
   }
 
   let isOutOfRange = (val) => {
-    return (/^[a-z]{0,200}$/.test(val));
+    return val.length > 200;
   }
 
   let isValid = false;
@@ -46,19 +45,13 @@ let addStoryListPost = async (req, res) => {
   let session_vars = new Array(parseInt(voters_num)).fill(voter_story);
 
   // finally define our session scheme
-  scheme = {
+  let scheme = {
     name: session_name,
     voter_number: voters_num,
     story_list: story_list,
     session: session_vars,
     final_story: new Array(story_list.length).fill(null)
   }
-
-  // Database connection setup
-  let mongoDB = 'mongodb://admin:admin*123@ds263137.mlab.com:63137/hasangenc';
-
-  mongoose.connect(mongoDB, { useNewUrlParser: true });
-  mongoose.Promise = global.Promise;
 
   // if sessionname already taken throw error in view
   Session.find({ name: scheme.name }, (err, session) => {

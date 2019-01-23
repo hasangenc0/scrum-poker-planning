@@ -1,8 +1,8 @@
 const express = require('express');
 const port = process.env.PORT || 5000;
 const path = require('path');
-const session = require('express-session');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 let app = express();
 
@@ -14,6 +14,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, '../public')));
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'pug');
+
+// Database connection setup
+let mongoDB = 'mongodb://admin:admin*123@ds263137.mlab.com:63137/hasangenc';
+
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.Promise = global.Promise;
 
 // routes
 require('./routes/routes.js')(app); // load route

@@ -1,5 +1,4 @@
 const Session = require("../models/session");
-const mongoose = require('mongoose');
 
 let ViewAsDeveloper = (req, res) => {
 
@@ -8,12 +7,6 @@ let ViewAsDeveloper = (req, res) => {
 		res.redirect('/poker-planning-view-as-scrum-master/' + req.params.session); // Redirects viewAsScrumMaster Page
 		return;
 	}
-
-	// Database connection setup
-	let mongoDB = 'mongodb://admin:admin*123@ds263137.mlab.com:63137/hasangenc';
-
-	mongoose.connect(mongoDB, { useNewUrlParser: true });
-	mongoose.Promise = global.Promise;
 
 	// if session name already taken then throw error in view
 	Session.find({ name: req.params.session }, (err, session) => {

@@ -1,16 +1,9 @@
 const Session = require("../models/session");
-const mongoose = require('mongoose');
 
 let MakeVotes = async (req, res) => {
   console.log("hasan: ");
   console.log();
   let body = JSON.parse(req.params.body);
-
-  // Database connection setup
-  let mongoDB = 'mongodb://admin:admin*123@ds263137.mlab.com:63137/hasangenc';
-
-  mongoose.connect(mongoDB, { useNewUrlParser: true });
-  mongoose.Promise = global.Promise;
 
   // if sessionname already taken throw error in view
   Session.find({ name: body.name }, (err, votes) => {
