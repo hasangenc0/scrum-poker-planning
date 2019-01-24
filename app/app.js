@@ -3,6 +3,7 @@ const port = process.env.PORT || 5000;
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('dotenv').config()
 
 let app = express();
 
@@ -16,7 +17,8 @@ app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'pug');
 
 // Database connection setup
-let mongoDB = 'mongodb://admin:admin*123@ds263137.mlab.com:63137/hasangenc';
+
+let mongoDB = process.env.DB;
 
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
